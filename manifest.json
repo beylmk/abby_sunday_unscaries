@@ -1,10 +1,10 @@
 {
-  "name": "SimpleApp",
-  "short_name": "SimpleApp",
+  "name": "BirthdayApp",
+  "short_name": "Birthday",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#007aff",
+  "theme_color": "#ff69b4",
   "icons": [
     {
       "src": "icons/icon-192.png",

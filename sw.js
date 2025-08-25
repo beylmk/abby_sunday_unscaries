@@ -1,6 +1,6 @@
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open("simple-app-cache").then(cache => {
+    caches.open("birthday-app-cache").then(cache => {
       return cache.addAll([
         "index.html",
         "styles.css",
