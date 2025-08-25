@@ -1,19 +1,8 @@
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open("birthday-app-cache").then(cache => {
-      return cache.addAll([
-        "index.html",
-        "styles.css",
-        "manifest.json"
-      ]);
-    })
-  );
+self.addEventListener("install", e=>{
+  e.waitUntil(caches.open("birthday-single-cache").then(c=>c.addAll([
+    "index.html","styles.css","manifest.json","script.js"
+  ])));
 });
-
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
+self.addEventListener("fetch", e=>{
+  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
 });

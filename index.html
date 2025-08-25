@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday Abby 🎂</title>
-
-  <!-- iOS PWA meta -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="BirthdayApp">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-
-  <!-- PWA manifest -->
-  <link rel="manifest" href="manifest.json">
-
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="BirthdayApp" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
 </head>
 <body>
+  <canvas id="confetti"></canvas>
+
   <main>
     <h1 class="rainbow-text">🎉 Happy Birthday Abby 🎉</h1>
+    <div class="instructions">
+      <h2>Install on your iPhone</h2>
+      <ol>
+        <li>Open this page in <strong>Safari</strong>.</li>
+        <li>Tap the <strong>Share</strong> button.</li>
+        <li>Choose <strong>Add to Home Screen</strong>.</li>
+        <li>Tap <strong>Add</strong> — it’ll appear like an app!</li>
+      </ol>
+    </div>
   </main>
 
+  <script src="script.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js")
-        .then(() => console.log("Service Worker registered"))
-        .catch(err => console.error("SW registration failed:", err));
+      navigator.serviceWorker.register("sw.js").catch(console.error);
     }
   </script>
 </body>
