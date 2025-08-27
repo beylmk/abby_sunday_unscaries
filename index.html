@@ -12,14 +12,32 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
 </head>
 <body>
-  <main id="content"><h1>Loading...</h1></main>
+  <!-- BIG countdown now lives at the top -->
+  <h1 id="countdown" class="countdown-head">⏳ Calculating time to next Sunday…</h1>
 
-  <div id="countdown" class="countdown">⏳ Calculating time to next Sunday…</div>
+  <!-- Weekly page content will render smaller below -->
+  <main id="content" class="content-card"><p>Loading…</p></main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=6"></script>
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(console.error);
+
+      navigator.serviceWorker.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "SW_ACTIVATED") {
+          const key = "reloaded-for-sw-" + event.data.version;
+          if (!sessionStorage.getItem(key)) {
+            sessionStorage.setItem(key, "1");
+            location.reload();
+          }
+        }
+      });
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (!sessionStorage.getItem("controllerchange-reloaded")) {
+          sessionStorage.setItem("controllerchange-reloaded", "1");
+          location.reload();
+        }
+      });
     }
   </script>
 </body>

@@ -1,6 +1,5 @@
-// Weekly content loader + countdown to next Sunday
+// Weekly content loader + BIG countdown to next Sunday
 (function(){
-  // Start on the first Sunday: 2025-09-07
   const START_ISO = "2025-09-07";
   const TOTAL_WEEKS = 52;
 
@@ -19,15 +18,14 @@
 
   const pageIndex = weeksPassed + 1; // 1..52
   const mount = document.getElementById("content");
-  fetch(`pages/page-${pageIndex}.html`).then(r=>r.ok?r.text():Promise.reject(r.status))
+  fetch(`pages/page-${pageIndex}.html?v=6`, { cache: "no-store" }).then(r=>r.ok?r.text():Promise.reject(r.status))
     .then(html=>{ mount.innerHTML = html; })
-    .catch(()=>{ mount.innerHTML = "<h1>No page found yet!</h1>"; });
+    .catch(()=>{ mount.innerHTML = "<p>No page found yet!</p>"; });
 
-  // ------- Countdown to next Sunday -------
+  // ------- BIG Countdown to next Sunday (headline) -------
   function getNextSunday() {
     const now = new Date();
     const next = new Date(now);
-    // Set to next 00:00 local time for Sunday boundary
     next.setHours(0,0,0,0);
     const daysUntilSunday = ((7 - next.getDay()) % 7) || 7; // 0=Sun
     next.setDate(next.getDate() + daysUntilSunday);
@@ -50,7 +48,6 @@
     const seconds = Math.floor((diff / 1000) % 60);
     el.textContent = `⏳ Next Sunday in ${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
-
   updateCountdown();
   setInterval(updateCountdown, 1000);
 })();
