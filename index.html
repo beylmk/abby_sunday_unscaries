@@ -3,41 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weekly Surprise 🎁</title>
+  <title>Sunday Unscary 🎁</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
-  <!-- iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Weekly Surprise" />
+  <meta name="apple-mobile-web-app-title" content="Sunday Unscary" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
 </head>
 <body>
-  <!-- BIG countdown now lives at the top -->
-  <h1 id="countdown" class="countdown-head">⏳ Calculating time to next Sunday…</h1>
+  <section id="nonSunday" class="hidden">
+    <h1 class="headline">⏳ Next Sunday in <span id="countdown">...</span></h1>
+    <button class="btn" id="seeHistory">See history</button>
+  </section>
 
-  <!-- Weekly page content will render smaller below -->
-  <main id="content" class="content-card"><p>Loading…</p></main>
+  <canvas id="confetti"></canvas>
+  <section id="sundayWelcome" class="hidden">
+    <h1 class="headline">🎉 Happy Sunday!</h1>
+    <p class="subtitle">A new surprise is unlocked today.</p>
+    <button class="btn primary" id="viewSurprise">View surprise</button>
+  </section>
 
-  <script src="script.js?v=6"></script>
+  <script src="main.js?v=2"></script>
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(console.error);
-
-      navigator.serviceWorker.addEventListener("message", (event) => {
-        if (event.data && event.data.type === "SW_ACTIVATED") {
-          const key = "reloaded-for-sw-" + event.data.version;
-          if (!sessionStorage.getItem(key)) {
-            sessionStorage.setItem(key, "1");
-            location.reload();
-          }
-        }
-      });
-      navigator.serviceWorker.addEventListener("controllerchange", () => {
-        if (!sessionStorage.getItem("controllerchange-reloaded")) {
-          sessionStorage.setItem("controllerchange-reloaded", "1");
-          location.reload();
-        }
-      });
     }
   </script>
 </body>
